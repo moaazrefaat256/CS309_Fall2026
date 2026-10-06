@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Cafe - Contact</title>
+    <link rel="stylesheet" href="css/style.css"> 
+</head>
+<body>
+    <header>
+        <h1>Campus Cafe</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact/Order</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Contact Us or Place an Order</h2>
+            <form action="#" method="POST">
+
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div>
+                    <label for="quantity">Number of Items:</label>
+                    <input type="number" id="quantity" name="quantity" min="1" max="20">
+                </div>
+
+
+                <div>
+                    <label for="pickup_date">Pickup Date:</label>
+                    <input type="date" id="pickup_date" name="pickup_date">
+                </div>
+                
+                <div>
+                    <label>Order Type:</label>
+                    <input type="radio" id="pickup" name="orderType" value="pickup" checked>
+                    <label for="pickup">Pickup</label>
+                    <input type="radio" id="dinein" name="orderType" value="dinein">
+                    <label for="dinein">Dine-in</label>
+                </div>
+
+                <div>
+                    <label for="drink">Favorite Drink:</label>
+                    <select id="drink" name="drink">
+                        <option value="espresso">Espresso</option>
+                        <option value="latte">Latte</option>
+                        <option value="tea">Tea</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="message">Additional Notes:</label><br>
+                    <textarea id="message" name="message" rows="4" cols="30"></textarea>
+                </div>
+
+                <div>
+                    <input type="checkbox" id="newsletter" name="newsletter">
+                    <label for="newsletter">Subscribe to our student newsletter</label>
+                </div>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Campus Cafe. Built for the final project.</p>
+    </footer>
+</body>
+</html>
