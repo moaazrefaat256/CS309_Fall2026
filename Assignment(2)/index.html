@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Campus Cafe home page featuring coffee menu, student discounts, and announcements.">
+    <title>Campus Cafe - Home</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Campus Cafe</h1>
+        
+        <div class="theme-switch-wrapper">
+            <input type="checkbox" id="theme-toggle" class="theme-toggle-input">
+            <label for="theme-toggle" class="theme-toggle-label" aria-label="Toggle dark mode">
+                <span class="icon-sun">☀️</span>
+                <span class="icon-moon">🌙</span>
+                <span class="toggle-ball"></span>
+            </label>
+        </div>
+
+        <nav aria-label="Main Navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact/Order</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="alert" role="region" aria-label="Notice">
+            📢 Midterm Special: Get 20% off all specialty lattes this week with your student ID!
+        </div>
+
+        <section class="card" style="margin-bottom: 20px;">
+            <h2>Welcome to Campus Cafe!</h2>
+            <p>Your favorite spot for studying, relaxing, and enjoying premium coffee.</p>
+            <a href="#promo-modal" class="btn">View Special Offer</a>
+        </section>
+
+        <section aria-labelledby="menu-heading">
+            <h2 id="menu-heading">Featured Highlights</h2>
+            <div class="grid-container">
+                <article class="card">
+                    <h3>Espresso Drinks</h3>
+                    <p>Rich, bold espresso handcrafted by our student baristas.</p>
+                </article>
+                <article class="card">
+                    <h3>Fresh Bakery</h3>
+                    <p>Muffins, croissants, and snacks baked fresh every morning.</p>
+                </article>
+                <article class="card">
+                    <h3>Study Spaces</h3>
+                    <p>Quiet zones with high-speed Wi-Fi and plenty of power outlets.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="card" style="margin-top: 20px;">
+            <h2>Full Menu</h2>
+            <table>
+                <caption>Campus Cafe Standard Menu and Pricing</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Item</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Espresso</td>
+                        <td>Strong and bold</td>
+                        <td>$2.50</td>
+                    </tr>
+                    <tr>
+                        <td>Latte</td>
+                        <td>Smooth with steamed milk</td>
+                        <td>$3.50</td>
+                    </tr>
+                    <tr>
+                        <td>Muffin</td>
+                        <td>Freshly baked blueberry muffin</td>
+                        <td>$2.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div id="promo-modal" class="modal-overlay" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+            <div class="modal-content">
+                <a href="#" class="modal-close" aria-label="Close modal">&times;</a>
+                <h3 id="modal-title">Special Student Promotion</h3>
+                <p>Show your current student ID at checkout to receive 10% off any order over $5.00!</p>
+                <a href="#" class="btn" style="margin-top: 10px;">Got It</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Campus Cafe. Built for the final project.</p>
+    </footer>
+</body>
+</html>
