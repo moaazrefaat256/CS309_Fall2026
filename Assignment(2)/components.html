@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Campus Cafe UI component library featuring buttons, cards, alerts, and a modal.">
+    <title>Campus Cafe - Components</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Campus Cafe</h1>
+        
+        <div class="theme-switch-wrapper">
+            <input type="checkbox" id="theme-toggle" class="theme-toggle-input">
+            <label for="theme-toggle" class="theme-toggle-label" aria-label="Toggle dark mode">
+                <span class="icon-sun">☀️</span>
+                <span class="icon-moon">🌙</span>
+                <span class="toggle-ball"></span>
+            </label>
+        </div>
+
+        <nav aria-label="Main Navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="components.html" aria-current="page">Components</a></li>
+                <li><a href="contact.html">Contact/Order</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="card" aria-labelledby="buttons-title" style="margin-bottom: 20px;">
+            <h2 id="buttons-title">Buttons</h2>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+                <button type="button" class="btn">Primary Button</button>
+                <button type="button" class="btn" style="opacity: 0.6; cursor: not-allowed;" disabled>Disabled Button</button>
+                <a class="btn" href="#buttons-title">Link Button</a>
+            </div>
+        </section>
+
+        <section class="card" aria-labelledby="cards-title" style="margin-bottom: 20px;">
+            <h2 id="cards-title">Cards Grid Layout</h2>
+            <div class="grid-container">
+                <article class="card">
+                    <h3>Mobile View</h3>
+                    <p>Displays in 1 column on small screens.</p>
+                </article>
+                <article class="card">
+                    <h3>Tablet View</h3>
+                    <p>Displays in 2 columns from 600px width.</p>
+                </article>
+                <article class="card">
+                    <h3>Desktop View</h3>
+                    <p>Displays in 3 columns from 900px width.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="card" aria-labelledby="alert-title" style="margin-bottom: 20px;">
+            <h2 id="alert-title">Alert Notifications</h2>
+            <div class="alert" role="status">
+                📢 <strong>Notice:</strong> This is a standard system alert message.
+            </div>
+        </section>
+
+        <section class="card" aria-labelledby="modal-demo-title">
+            <h2 id="modal-demo-title">CSS-only Modal</h2>
+            <p>Click below to test the CSS modal target overlay.</p>
+            <a href="#demo-modal" class="btn">Open Modal</a>
+
+            <div id="demo-modal" class="modal-overlay" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                <div class="modal-content">
+                    <a href="#" class="modal-close" aria-label="Close modal">&times;</a>
+                    <h3 id="modal-title">CSS Modal Title</h3>
+                    <p>This modal operates purely via CSS anchor tags without JavaScript.</p>
+                    <a href="#" class="btn" style="margin-top: 10px;">Close Window</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Campus Cafe. Built for the final project.</p>
+    </footer>
+</body>
+</html>
