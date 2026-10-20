@@ -19,6 +19,9 @@
         </div>
     </div>
 
+    <!-- Mobile Scroll Instruction Hint -->
+    <div class="scroll-hint">&larr; Swipe or scroll horizontally to view all columns & actions &rarr;</div>
+
     <!-- Responsive Scroll Container for Mobile -->
     <div class="table-responsive">
         <table>
@@ -37,7 +40,7 @@
         </table>
     </div>
 
-    <div class="nav-link" style="margin-top: 25px;">
+    <div class="nav-link" style="margin-top: 20px;">
         <a href="validation.html">&larr; Back to Registration Form</a>
         &nbsp;&nbsp;|&nbsp;&nbsp;
         <a href="index.html">Back to Home Portal</a>
@@ -45,7 +48,7 @@
 </div>
 
 <script>
-    // Empty initial data (No dummy test data as requested)
+    // Strict empty array default (No leftover dummy data)
     let personnelData = JSON.parse(localStorage.getItem('personnelData')) || [];
     let currentData = [...personnelData];
     let sortNameAsc = true;
@@ -145,7 +148,7 @@
             return sortAgeAsc ? a.age - b.age : b.age - a.age;
         });
         sortAgeAsc = !sortAgeAsc;
-        sortAgeBtn.textContent = sortAgeAsset = sortAgeAsc ? 'Sort by Age (Low-High)' : 'Sort by Age (High-Low)';
+        sortAgeBtn.textContent = sortAgeAsc ? 'Sort by Age (Low-High)' : 'Sort by Age (High-Low)';
         renderTable(currentData);
     });
 

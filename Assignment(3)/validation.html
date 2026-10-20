@@ -197,7 +197,7 @@
                 profession: professionInput.value.trim()
             };
 
-            // Start empty if no user added yet (NO dummy test data!)
+            // Pull strictly real data only, strictly empty if none exists
             let existingData = JSON.parse(localStorage.getItem('personnelData')) || [];
 
             existingData.unshift(newUser);
