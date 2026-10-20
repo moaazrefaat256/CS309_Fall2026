@@ -19,9 +19,6 @@
         </div>
     </div>
 
-    <!-- Clear mobile swipe instructions -->
-    <div class="scroll-hint">👉 اسحب الجدول يميناً ويساراً لمشاهدة باقي الأعمدة وأزرار التعديل والحذف</div>
-
     <!-- Scrollable container -->
     <div class="table-responsive">
         <table>
@@ -48,12 +45,10 @@
 </div>
 
 <script>
-    // Clean up and load data, strictly ignoring any old default test data
     let rawData = JSON.parse(localStorage.getItem('personnelData')) || [];
     const legacyNames = ["Alexander Wright", "Victoria Sterling", "Liam O'Connor", "Sophia Martinez", "Hiroshi Tanaka"];
     let personnelData = rawData.filter(item => !legacyNames.includes(item.name));
     
-    // Save back cleaned data
     localStorage.setItem('personnelData', JSON.stringify(personnelData));
 
     let currentData = [...personnelData];

@@ -157,14 +157,6 @@ input:focus, select:focus {
     }
 }
 
-.scroll-hint {
-    font-size: 11px;
-    color: #e0245e;
-    text-align: center;
-    margin-bottom: 6px;
-    font-weight: 600;
-}
-
 /* Perfect Horizontal Scroll Container */
 .table-responsive {
     width: 100%;

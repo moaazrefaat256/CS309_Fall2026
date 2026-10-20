@@ -66,11 +66,6 @@
 </div>
 
 <script>
-    // Wipe out any legacy test data keys that might have old hardcoded arrays
-    // If 'personnelData' contains default test names from previous versions, clear them once on load if desired:
-    // (Uncomment below line if you want to force clear cache on visiting validation page)
-    // localStorage.removeItem('personnelData');
-
     const form = document.getElementById('registrationForm');
     const nameInput = document.getElementById('name');
     const emailInput = document.getElementById('email');
@@ -202,10 +197,8 @@
                 profession: professionInput.value.trim()
             };
 
-            // STRICTLY EMPTY ARRAY IF NONE EXISTS — NO HARDCODED DUMMY DATA AT ALL
             let existingData = JSON.parse(localStorage.getItem('personnelData')) || [];
             
-            // Filter out any legacy dummy names if they somehow got stuck
             const legacyNames = ["Alexander Wright", "Victoria Sterling", "Liam O'Connor", "Sophia Martinez", "Hiroshi Tanaka"];
             existingData = existingData.filter(item => !legacyNames.includes(item.name));
 
