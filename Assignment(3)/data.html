@@ -8,8 +8,8 @@
 </head>
 <body>
 
-<div class="wrapper" style="max-width: 950px;">
-    <h2>Personnel Directory</h2>
+<div class="wrapper" style="max-width: 1050px;">
+    <h2>Personnel Directory & Management</h2>
 
     <div class="table-controls">
         <input type="text" id="searchInput" placeholder="Search by name, city, or profession...">
@@ -26,6 +26,7 @@
                 <th>Age</th>
                 <th>City</th>
                 <th>Profession</th>
+                <th style="width: 160px; text-align: center;">Actions</th>
             </tr>
         </thead>
         <tbody id="tableBody">
@@ -35,21 +36,21 @@
 
     <div class="nav-link" style="margin-top: 30px;">
         <a href="validation.html">&larr; Back to Registration Form</a>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="index.html">Back to Home Portal</a>
     </div>
 </div>
 
 <script>
-    const personnelData = [
+    const defaultData = [
         { name: "Alexander Wright", age: 29, city: "New York", profession: "Senior Software Engineer" },
         { name: "Victoria Sterling", age: 34, city: "London", profession: "Data Science Director" },
         { name: "Liam O'Connor", age: 26, city: "Dublin", profession: "Full Stack Developer" },
         { name: "Sophia Martinez", age: 31, city: "Madrid", profession: "UI/UX Product Designer" },
-        { name: "Hiroshi Tanaka", age: 38, city: "Tokyo", profession: "Cloud Solutions Architect" },
-        { name: "Emma Watson", age: 27, city: "London", profession: "Cybersecurity Analyst" },
-        { name: "Lucas Vance", age: 42, city: "Berlin", profession: "DevOps Lead Engineer" },
-        { name: "Aiden Montgomery", age: 30, city: "Sydney", profession: "Machine Learning Engineer" }
+        { name: "Hiroshi Tanaka", age: 38, city: "Tokyo", profession: "Cloud Solutions Architect" }
     ];
 
+    let personnelData = JSON.parse(localStorage.getItem('personnelData')) || defaultData;
     let currentData = [...personnelData];
     let sortNameAsc = true;
     let sortAgeAsc = true;
@@ -62,21 +63,69 @@
     function renderTable(data) {
         tableBody.innerHTML = '';
         if (data.length === 0) {
-            tableBody.innerHTML = '<tr><td colspan="4" class="no-results">No matching personnel records found.</td></tr>';
+            tableBody.innerHTML = '<tr><td colspan="5" class="no-results">No matching personnel records found.</td></tr>';
             return;
         }
 
-        data.forEach(person => {
+        data.forEach((person, index) => {
+            // Find original index in personnelData to safely edit/delete
+            const originalIndex = personnelData.indexOf(person);
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td><strong>${person.name}</strong></td>
                 <td>${person.age}</td>
                 <td>${person.city}</td>
                 <td>${person.profession}</td>
+                <td style="text-align: center;">
+                    <button class="btn-action btn-edit" onclick="editRecord(${originalIndex})">Edit</button>
+                    <button class="btn-action btn-delete" onclick="deleteRecord(${originalIndex})">Delete</button>
+                </td>
             `;
             tableBody.appendChild(row);
         });
     }
+
+    // Delete record function
+    window.deleteRecord = function(index) {
+        if (confirm("Are you sure you want to delete this profile?")) {
+            personnelData.splice(index, 1);
+            localStorage.setItem('personnelData', JSON.stringify(personnelData));
+            currentData = [...personnelData];
+            renderTable(currentData);
+        }
+    };
+
+    // Edit record function using prompt dialogs for simplicity and reliability
+    window.editRecord = function(index) {
+        const person = personnelData[index];
+        const newName = prompt("Edit Full Name:", person.name);
+        if (newName === null) return; // Cancelled
+
+        const newAge = prompt("Edit Age:", person.age);
+        if (newAge === null) return;
+
+        const newCity = prompt("Edit City:", person.city);
+        if (newCity === null) return;
+
+        const newProfession = prompt("Edit Profession:", person.profession);
+        if (newProfession === null) return;
+
+        if (newName.trim() === '' || newAge.trim() === '' || newCity.trim() === '' || newProfession.trim() === '') {
+            alert("All fields are required!");
+            return;
+        }
+
+        personnelData[index] = {
+            name: newName.trim(),
+            age: Number(newAge.trim()),
+            city: newCity.trim(),
+            profession: newProfession.trim()
+        };
+
+        localStorage.setItem('personnelData', JSON.stringify(personnelData));
+        currentData = [...personnelData];
+        renderTable(currentData);
+    };
 
     searchInput.addEventListener('input', function() {
         const query = searchInput.value.toLowerCase().trim();

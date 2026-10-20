@@ -42,12 +42,26 @@
             <span id="ageError" class="error-message"></span>
         </div>
 
-        <button type="submit" class="btn-submit">Register Account</button>
-        <div id="successMessage" class="success-banner">Registration successful! All fields validated.</div>
+        <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" placeholder="e.g., New York, London, Tokyo">
+            <span id="cityError" class="error-message"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="profession">Profession</label>
+            <input type="text" id="profession" name="profession" placeholder="e.g., Software Engineer">
+            <span id="professionError" class="error-message"></span>
+        </div>
+
+        <button type="submit" class="btn-submit">Register & Add to Directory</button>
+        <div id="successMessage" class="success-banner">Registration successful! Added to data directory.</div>
     </form>
 
     <div class="nav-link">
-        <a href="data.html">View Data Table Directory &rarr;</a>
+        <a href="data.html">&rarr; View Personnel Directory & Data Table</a>
+        <br><br>
+        <a href="index.html">&larr; Back to Home Portal</a>
     </div>
 </div>
 
@@ -58,12 +72,16 @@
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirmPassword');
     const ageInput = document.getElementById('age');
+    const cityInput = document.getElementById('city');
+    const professionInput = document.getElementById('profession');
 
     const nameError = document.getElementById('nameError');
     const emailError = document.getElementById('emailError');
     const passwordError = document.getElementById('passwordError');
     const confirmPasswordError = document.getElementById('confirmPasswordError');
     const ageError = document.getElementById('ageError');
+    const cityError = document.getElementById('cityError');
+    const professionError = document.getElementById('professionError');
     const successMessage = document.getElementById('successMessage');
 
     nameInput.addEventListener('input', validateName);
@@ -71,6 +89,8 @@
     passwordInput.addEventListener('input', validatePassword);
     confirmPasswordInput.addEventListener('input', validateConfirmPassword);
     ageInput.addEventListener('input', validateAge);
+    cityInput.addEventListener('input', validateCity);
+    professionInput.addEventListener('input', validateProfession);
 
     function validateName() {
         if (nameInput.value.trim() === '') {
@@ -139,6 +159,26 @@
         }
     }
 
+    function validateCity() {
+        if (cityInput.value.trim() === '') {
+            cityError.textContent = 'City is required.';
+            return false;
+        } else {
+            cityError.textContent = '';
+            return true;
+        }
+    }
+
+    function validateProfession() {
+        if (professionInput.value.trim() === '') {
+            professionError.textContent = 'Profession is required.';
+            return false;
+        } else {
+            professionError.textContent = '';
+            return true;
+        }
+    }
+
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         const isNameValid = validateName();
@@ -146,8 +186,28 @@
         const isPasswordValid = validatePassword();
         const isConfirmValid = validateConfirmPassword();
         const isAgeValid = validateAge();
+        const isCityValid = validateCity();
+        const isProfValid = validateProfession();
 
-        if (isNameValid && isEmailValid && isPasswordValid && isConfirmValid && isAgeValid) {
+        if (isNameValid && isEmailValid && isPasswordValid && isConfirmValid && isAgeValid && isCityValid && isProfValid) {
+            const newUser = {
+                name: nameInput.value.trim(),
+                age: Number(ageInput.value.trim()),
+                city: cityInput.value.trim(),
+                profession: professionInput.value.trim()
+            };
+
+            let existingData = JSON.parse(localStorage.getItem('personnelData')) || [
+                { name: "Alexander Wright", age: 29, city: "New York", profession: "Senior Software Engineer" },
+                { name: "Victoria Sterling", age: 34, city: "London", profession: "Data Science Director" },
+                { name: "Liam O'Connor", age: 26, city: "Dublin", profession: "Full Stack Developer" },
+                { name: "Sophia Martinez", age: 31, city: "Madrid", profession: "UI/UX Product Designer" },
+                { name: "Hiroshi Tanaka", age: 38, city: "Tokyo", profession: "Cloud Solutions Architect" }
+            ];
+
+            existingData.unshift(newUser);
+            localStorage.setItem('personnelData', JSON.stringify(existingData));
+
             successMessage.style.display = 'block';
             form.reset();
             setTimeout(() => {
