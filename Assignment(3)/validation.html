@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Registration</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="box">
+    <h2>تسجيل البيانات</h2>
+    <form id="myForm">
+        <label>الاسم:</label>
+        <input type="text" id="name">
+        <span id="nameError" class="error"></span>
+
+        <label>الإيميل:</label>
+        <input type="text" id="email">
+        <span id="emailError" class="error"></span>
+
+        <label>كلمة المرور:</label>
+        <input type="password" id="pass">
+        <span id="passError" class="error"></span>
+
+        <button type="submit">إرسال</button>
+    </form>
+</div>
+
+<script>
+    const form = document.getElementById('myForm');
+    
+    form.addEventListener('submit', function(e) {
+        let name = document.getElementById('name').value;
+        let email = document.getElementById('email').value;
+        let pass = document.getElementById('pass').value;
+
+        document.getElementById('nameError').innerText = '';
+        document.getElementById('emailError').innerText = '';
+        document.getElementById('passError').innerText = '';
+
+        let isValid = true;
+
+        if (name === '') {
+            document.getElementById('nameError').innerText = 'الاسم مطلوب';
+            isValid = false;
+        }
+
+        if (email === '') {
+            document.getElementById('emailError').innerText = 'الإيميل مطلوب';
+            isValid = false;
+        }
+
+        if (pass.length < 8) {
+            document.getElementById('passError').innerText = 'كلمة المرور يجب أن تكون 8 أحرف على الأقل';
+            isValid = false;
+        }
+
+        if (!isValid) {
+            e.preventDefault();
+        }
+    });
+</script>
+
+</body>
+</html>

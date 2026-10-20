@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Data Table</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="box" style="max-width: 600px;">
+    <h2>بيانات المستخدمين</h2>
+    
+    <input type="text" id="searchBox" placeholder="ابحث هنا...">
+
+    <table>
+        <thead>
+            <tr>
+                <th>الاسم</th>
+                <th>العمر</th>
+                <th>المدينة</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+    </table>
+</div>
+
+<script>
+    const people = [
+        { name: "أحمد", age: 20, city: "القاهرة" },
+        { name: "محمود", age: 25, city: "الإسكندرية" },
+        { name: "علي", age: 22, city: "الجيزة" }
+    ];
+
+    const tableBody = document.getElementById('tableBody');
+    const searchBox = document.getElementById('searchBox');
+
+    function showTable(data) {
+        tableBody.innerHTML = '';
+        for (let i = 0; i < data.length; i++) {
+            let row = '<tr>' +
+                        '<td>' + data[i].name + '</td>' +
+                        '<td>' + data[i].age + '</td>' +
+                        '<td>' + data[i].city + '</td>' +
+                      '</tr>';
+            tableBody.innerHTML += row;
+        }
+    }
+
+    showTable(people);
+
+    searchBox.addEventListener('input', function() {
+        let text = searchBox.value.toLowerCase();
+        let filtered = [];
+
+        for (let i = 0; i < people.length; i++) {
+            if (people[i].name.toLowerCase().includes(text) || people[i].city.toLowerCase().includes(text)) {
+                filtered.push(people[i]);
+            }
+        }
+
+        showTable(filtered);
+    });
+</script>
+
+</body>
+</html>
