@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personnel Directory & Data Table</title>
+    <title>Personnel Directory</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<div class="wrapper" style="max-width: 1000px;">
-    <h2>Personnel Directory & Management</h2>
+<div class="wrapper">
+    <h2>Personnel Directory</h2>
 
     <div class="table-controls">
-        <input type="text" id="searchInput" placeholder="Search by name, city, or profession...">
+        <input type="text" id="searchInput" placeholder="Search name, city, profession...">
         <div class="sort-group">
-            <button id="sortNameBtn" class="btn-sort">Sort by Name</button>
-            <button id="sortAgeBtn" class="btn-sort">Sort by Age</button>
+            <button id="sortNameBtn" class="btn-sort">Sort Name</button>
+            <button id="sortAgeBtn" class="btn-sort">Sort Age</button>
         </div>
     </div>
 
-    <!-- Mobile Scroll Instruction Hint -->
-    <div class="scroll-hint">&larr; Swipe or scroll horizontally to view all columns & actions &rarr;</div>
+    <!-- Clear mobile swipe instructions -->
+    <div class="scroll-hint">👉 اسحب الجدول يميناً ويساراً لمشاهدة باقي الأعمدة وأزرار التعديل والحذف</div>
 
-    <!-- Responsive Scroll Container for Mobile -->
+    <!-- Scrollable container -->
     <div class="table-responsive">
         <table>
             <thead>
@@ -31,25 +31,31 @@
                     <th>Age</th>
                     <th>City</th>
                     <th>Profession</th>
-                    <th style="width: 130px; text-align: center;">Actions</th>
+                    <th style="width: 110px; text-align: center;">Actions</th>
                 </tr>
             </thead>
             <tbody id="tableBody">
-                <!-- Dynamic rows will be inserted here -->
+                <!-- Dynamic rows -->
             </tbody>
         </table>
     </div>
 
-    <div class="nav-link" style="margin-top: 20px;">
+    <div class="nav-link">
         <a href="validation.html">&larr; Back to Registration Form</a>
         &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="index.html">Back to Home Portal</a>
+        <a href="index.html">Back to Home</a>
     </div>
 </div>
 
 <script>
-    // Strict empty array default (No leftover dummy data)
-    let personnelData = JSON.parse(localStorage.getItem('personnelData')) || [];
+    // Clean up and load data, strictly ignoring any old default test data
+    let rawData = JSON.parse(localStorage.getItem('personnelData')) || [];
+    const legacyNames = ["Alexander Wright", "Victoria Sterling", "Liam O'Connor", "Sophia Martinez", "Hiroshi Tanaka"];
+    let personnelData = rawData.filter(item => !legacyNames.includes(item.name));
+    
+    // Save back cleaned data
+    localStorage.setItem('personnelData', JSON.stringify(personnelData));
+
     let currentData = [...personnelData];
     let sortNameAsc = true;
     let sortAgeAsc = true;
@@ -62,7 +68,7 @@
     function renderTable(data) {
         tableBody.innerHTML = '';
         if (data.length === 0) {
-            tableBody.innerHTML = '<tr><td colspan="5" class="no-results">No personnel records found. Please register users using the form.</td></tr>';
+            tableBody.innerHTML = '<tr><td colspan="5" class="no-results">No records found. Please submit a registration first.</td></tr>';
             return;
         }
 
@@ -139,7 +145,7 @@
             return sortNameAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
         });
         sortNameAsc = !sortNameAsc;
-        sortNameBtn.textContent = sortNameAsc ? 'Sort by Name (A-Z)' : 'Sort by Name (Z-A)';
+        sortNameBtn.textContent = sortNameAsc ? 'Sort Name (A-Z)' : 'Sort Name (Z-A)';
         renderTable(currentData);
     });
 
@@ -148,7 +154,7 @@
             return sortAgeAsc ? a.age - b.age : b.age - a.age;
         });
         sortAgeAsc = !sortAgeAsc;
-        sortAgeBtn.textContent = sortAgeAsc ? 'Sort by Age (Low-High)' : 'Sort by Age (High-Low)';
+        sortAgeBtn.textContent = sortAgeAsc ? 'Sort Age (Low-High)' : 'Sort Age (High-Low)';
         renderTable(currentData);
     });
 

@@ -44,7 +44,7 @@
 
         <div class="form-group">
             <label for="city">City</label>
-            <input type="text" id="city" name="city" placeholder="e.g., Cairo, New York, London">
+            <input type="text" id="city" name="city" placeholder="e.g., Cairo, Giza">
             <span id="cityError" class="error-message"></span>
         </div>
 
@@ -55,17 +55,22 @@
         </div>
 
         <button type="submit" class="btn-submit">Register & Add to Directory</button>
-        <div id="successMessage" class="success-banner">Registration successful! Added to data directory.</div>
+        <div id="successMessage" class="success-banner">Registration successful! Added to directory.</div>
     </form>
 
     <div class="nav-link">
-        <a href="data.html">&rarr; View Personnel Directory & Data Table</a>
+        <a href="data.html">&rarr; View Personnel Directory</a>
         <br><br>
-        <a href="index.html">&larr; Back to Home Portal</a>
+        <a href="index.html">&larr; Back to Home</a>
     </div>
 </div>
 
 <script>
+    // Wipe out any legacy test data keys that might have old hardcoded arrays
+    // If 'personnelData' contains default test names from previous versions, clear them once on load if desired:
+    // (Uncomment below line if you want to force clear cache on visiting validation page)
+    // localStorage.removeItem('personnelData');
+
     const form = document.getElementById('registrationForm');
     const nameInput = document.getElementById('name');
     const emailInput = document.getElementById('email');
@@ -197,8 +202,12 @@
                 profession: professionInput.value.trim()
             };
 
-            // Pull strictly real data only, strictly empty if none exists
+            // STRICTLY EMPTY ARRAY IF NONE EXISTS — NO HARDCODED DUMMY DATA AT ALL
             let existingData = JSON.parse(localStorage.getItem('personnelData')) || [];
+            
+            // Filter out any legacy dummy names if they somehow got stuck
+            const legacyNames = ["Alexander Wright", "Victoria Sterling", "Liam O'Connor", "Sophia Martinez", "Hiroshi Tanaka"];
+            existingData = existingData.filter(item => !legacyNames.includes(item.name));
 
             existingData.unshift(newUser);
             localStorage.setItem('personnelData', JSON.stringify(existingData));
@@ -207,7 +216,7 @@
             form.reset();
             setTimeout(() => {
                 successMessage.style.display = 'none';
-            }, 5000);
+            }, 4000);
         } else {
             successMessage.style.display = 'none';
         }

@@ -5,67 +5,62 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f4f5f7;
     color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 15px;
+    padding: 10px;
 }
 
 .wrapper {
     width: 100%;
-    max-width: 950px;
+    max-width: 900px;
+    margin: 0 auto;
     background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 20px;
 }
 
 h2 {
-    font-size: 24px;
-    color: #1a1a1a;
-    margin-bottom: 20px;
+    font-size: 22px;
+    color: #111;
+    margin-bottom: 16px;
     font-weight: 600;
     text-align: center;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 12px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
 }
 
 .form-group {
-    margin-bottom: 16px;
+    margin-bottom: 14px;
 }
 
 label {
     display: block;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     color: #444;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
 }
 
 input, select {
     width: 100%;
-    padding: 10px 14px;
+    padding: 10px 12px;
     font-size: 14px;
-    border: 1.5px solid #dcdcdc;
-    border-radius: 8px;
-    transition: all 0.3s ease;
+    border: 1px solid #ccc;
+    border-radius: 6px;
     background-color: #fff;
 }
 
 input:focus, select:focus {
     outline: none;
     border-color: #4f46e5;
-    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
 }
 
 .error-message {
-    color: #ef4444;
-    font-size: 12px;
+    color: #dc2626;
+    font-size: 11px;
     margin-top: 4px;
     display: block;
     font-weight: 500;
@@ -77,12 +72,11 @@ input:focus, select:focus {
     background-color: #4f46e5;
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     font-size: 15px;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s ease;
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 .btn-submit:hover {
@@ -93,44 +87,40 @@ input:focus, select:focus {
     background-color: #d1fae5;
     color: #065f46;
     padding: 10px;
-    border-radius: 8px;
+    border-radius: 6px;
     text-align: center;
     font-weight: 600;
-    margin-top: 15px;
+    margin-top: 12px;
     display: none;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .nav-link {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 18px;
 }
 
 .nav-link a {
     color: #4f46e5;
     text-decoration: none;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .nav-link a:hover {
     text-decoration: underline;
 }
 
-/* Table controls */
+/* Controls */
 .table-controls {
     display: flex;
-    gap: 12px;
+    flex-direction: column;
+    gap: 10px;
     margin-bottom: 15px;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .table-controls input {
-    flex: 1;
-    min-width: 200px;
-    margin-bottom: 0;
+    width: 100%;
 }
 
 .sort-group {
@@ -139,72 +129,64 @@ input:focus, select:focus {
 }
 
 .btn-sort {
-    padding: 8px 12px;
+    flex: 1;
+    padding: 8px 10px;
     background-color: #f3f4f6;
     color: #374151;
     border: 1px solid #d1d5db;
-    border-radius: 8px;
+    border-radius: 6px;
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s;
-    width: auto;
-    margin-top: 0;
-}
-
-.btn-sort:hover {
-    background-color: #e5e7eb;
-}
-
-/* Scroll hint instruction for mobile users */
-.scroll-hint {
-    font-size: 12px;
-    color: #6b7280;
     text-align: center;
-    margin-bottom: 8px;
-    font-style: italic;
 }
 
-/* Crystal clear horizontal scroll wrapper with visible scrollbar */
+@media (min-width: 640px) {
+    .table-controls {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .table-controls input {
+        flex: 1;
+    }
+    .sort-group {
+        flex: unset;
+    }
+    .btn-sort {
+        flex: unset;
+    }
+}
+
+.scroll-hint {
+    font-size: 11px;
+    color: #e0245e;
+    text-align: center;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+/* Perfect Horizontal Scroll Container */
 .table-responsive {
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    border: 1.5px solid #d1d5db;
-    border-radius: 8px;
-    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    background: #fff;
     margin-bottom: 15px;
-}
-
-.table-responsive::-webkit-scrollbar {
-    height: 10px;
-}
-
-.table-responsive::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 0 0 8px 8px;
-}
-
-.table-responsive::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 5px;
-}
-
-.table-responsive::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 650px;
+    min-width: 550px;
 }
 
 th, td {
-    padding: 12px 16px;
+    padding: 10px 12px;
     text-align: left;
     border-bottom: 1px solid #e5e7eb;
-    font-size: 14px;
+    font-size: 13px;
     white-space: nowrap;
 }
 
@@ -214,25 +196,20 @@ th {
     font-weight: 600;
 }
 
-tr:hover td {
-    background-color: #f9fafb;
-}
-
 .action-cell {
     text-align: center;
     white-space: nowrap;
 }
 
 .btn-action {
-    padding: 5px 10px;
-    font-size: 12px;
+    padding: 4px 8px;
+    font-size: 11px;
     font-weight: 600;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
     display: inline-block;
     margin: 0 2px;
-    transition: background-color 0.2s;
 }
 
 .btn-edit {
@@ -240,23 +217,15 @@ tr:hover td {
     color: white;
 }
 
-.btn-edit:hover {
-    background-color: #d97706;
-}
-
 .btn-delete {
     background-color: #ef4444;
     color: white;
 }
 
-.btn-delete:hover {
-    background-color: #dc2626;
-}
-
 .no-results {
     text-align: center;
     color: #6b7280;
-    padding: 30px;
+    padding: 20px;
     font-style: italic;
     white-space: normal;
 }
