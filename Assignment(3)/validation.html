@@ -44,7 +44,7 @@
 
         <div class="form-group">
             <label for="city">City</label>
-            <input type="text" id="city" name="city" placeholder="e.g., New York, London, Tokyo">
+            <input type="text" id="city" name="city" placeholder="e.g., Cairo, New York, London">
             <span id="cityError" class="error-message"></span>
         </div>
 
@@ -197,13 +197,8 @@
                 profession: professionInput.value.trim()
             };
 
-            let existingData = JSON.parse(localStorage.getItem('personnelData')) || [
-                { name: "Alexander Wright", age: 29, city: "New York", profession: "Senior Software Engineer" },
-                { name: "Victoria Sterling", age: 34, city: "London", profession: "Data Science Director" },
-                { name: "Liam O'Connor", age: 26, city: "Dublin", profession: "Full Stack Developer" },
-                { name: "Sophia Martinez", age: 31, city: "Madrid", profession: "UI/UX Product Designer" },
-                { name: "Hiroshi Tanaka", age: 38, city: "Tokyo", profession: "Cloud Solutions Architect" }
-            ];
+            // Start empty if no user added yet (NO dummy test data!)
+            let existingData = JSON.parse(localStorage.getItem('personnelData')) || [];
 
             existingData.unshift(newUser);
             localStorage.setItem('personnelData', JSON.stringify(existingData));
