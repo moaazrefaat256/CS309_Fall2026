@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS-309 Assignment Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .portal-container {
+            text-align: center;
+            max-width: 500px;
+        }
+        .portal-container h1 {
+            margin-bottom: 15px;
+            color: #1a1a1a;
+            font-size: 28px;
+        }
+        .portal-container p {
+            color: #6b7280;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        .link-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .portal-btn {
+            display: block;
+            padding: 14px 20px;
+            background-color: #4f46e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        .portal-btn:hover {
+            background-color: #4338ca;
+        }
+        .portal-btn:active {
+            transform: scale(0.99);
+        }
+        .portal-btn.secondary {
+            background-color: #0ea5e9;
+        }
+        .portal-btn.secondary:hover {
+            background-color: #0284c7;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper portal-container">
+    <h1>CS-309 Assignment Portal</h1>
+    <p>Select a section below to view the requested implementation:</p>
+    
+    <div class="link-group">
+        <a href="validation.html" class="portal-btn">Part 1: Registration Form & Validation</a>
+        <a href="data.html" class="portal-btn secondary">Part 2: Personnel Directory & Data Table</a>
+    </div>
+</div>
+
+</body>
+</html>

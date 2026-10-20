@@ -1,66 +1,113 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Data Table</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personnel Directory & Data Table</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<div class="box" style="max-width: 600px;">
-    <h2>بيانات المستخدمين</h2>
-    
-    <input type="text" id="searchBox" placeholder="ابحث هنا...">
+<div class="wrapper" style="max-width: 950px;">
+    <h2>Personnel Directory</h2>
+
+    <div class="table-controls">
+        <input type="text" id="searchInput" placeholder="Search by name, city, or profession...">
+        <div class="sort-group">
+            <button id="sortNameBtn" class="btn-sort">Sort by Name</button>
+            <button id="sortAgeBtn" class="btn-sort">Sort by Age</button>
+        </div>
+    </div>
 
     <table>
         <thead>
             <tr>
-                <th>الاسم</th>
-                <th>العمر</th>
-                <th>المدينة</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>City</th>
+                <th>Profession</th>
             </tr>
         </thead>
         <tbody id="tableBody">
+            <!-- Dynamic rows will be inserted here -->
         </tbody>
     </table>
+
+    <div class="nav-link" style="margin-top: 30px;">
+        <a href="validation.html">&larr; Back to Registration Form</a>
+    </div>
 </div>
 
 <script>
-    const people = [
-        { name: "أحمد", age: 20, city: "القاهرة" },
-        { name: "محمود", age: 25, city: "الإسكندرية" },
-        { name: "علي", age: 22, city: "الجيزة" }
+    const personnelData = [
+        { name: "Alexander Wright", age: 29, city: "New York", profession: "Senior Software Engineer" },
+        { name: "Victoria Sterling", age: 34, city: "London", profession: "Data Science Director" },
+        { name: "Liam O'Connor", age: 26, city: "Dublin", profession: "Full Stack Developer" },
+        { name: "Sophia Martinez", age: 31, city: "Madrid", profession: "UI/UX Product Designer" },
+        { name: "Hiroshi Tanaka", age: 38, city: "Tokyo", profession: "Cloud Solutions Architect" },
+        { name: "Emma Watson", age: 27, city: "London", profession: "Cybersecurity Analyst" },
+        { name: "Lucas Vance", age: 42, city: "Berlin", profession: "DevOps Lead Engineer" },
+        { name: "Aiden Montgomery", age: 30, city: "Sydney", profession: "Machine Learning Engineer" }
     ];
 
-    const tableBody = document.getElementById('tableBody');
-    const searchBox = document.getElementById('searchBox');
+    let currentData = [...personnelData];
+    let sortNameAsc = true;
+    let sortAgeAsc = true;
 
-    function showTable(data) {
+    const tableBody = document.getElementById('tableBody');
+    const searchInput = document.getElementById('searchInput');
+    const sortNameBtn = document.getElementById('sortNameBtn');
+    const sortAgeBtn = document.getElementById('sortAgeBtn');
+
+    function renderTable(data) {
         tableBody.innerHTML = '';
-        for (let i = 0; i < data.length; i++) {
-            let row = '<tr>' +
-                        '<td>' + data[i].name + '</td>' +
-                        '<td>' + data[i].age + '</td>' +
-                        '<td>' + data[i].city + '</td>' +
-                      '</tr>';
-            tableBody.innerHTML += row;
+        if (data.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="4" class="no-results">No matching personnel records found.</td></tr>';
+            return;
         }
+
+        data.forEach(person => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><strong>${person.name}</strong></td>
+                <td>${person.age}</td>
+                <td>${person.city}</td>
+                <td>${person.profession}</td>
+            `;
+            tableBody.appendChild(row);
+        });
     }
 
-    showTable(people);
-
-    searchBox.addEventListener('input', function() {
-        let text = searchBox.value.toLowerCase();
-        let filtered = [];
-
-        for (let i = 0; i < people.length; i++) {
-            if (people[i].name.toLowerCase().includes(text) || people[i].city.toLowerCase().includes(text)) {
-                filtered.push(people[i]);
-            }
-        }
-
-        showTable(filtered);
+    searchInput.addEventListener('input', function() {
+        const query = searchInput.value.toLowerCase().trim();
+        currentData = personnelData.filter(person => 
+            person.name.toLowerCase().includes(query) ||
+            person.city.toLowerCase().includes(query) ||
+            person.profession.toLowerCase().includes(query) ||
+            person.age.toString().includes(query)
+        );
+        renderTable(currentData);
     });
+
+    sortNameBtn.addEventListener('click', function() {
+        currentData.sort((a, b) => {
+            return sortNameAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+        });
+        sortNameAsc = !sortNameAsc;
+        sortNameBtn.textContent = sortNameAsc ? 'Sort by Name (A-Z)' : 'Sort by Name (Z-A)';
+        renderTable(currentData);
+    });
+
+    sortAgeBtn.addEventListener('click', function() {
+        currentData.sort((a, b) => {
+            return sortAgeAsc ? a.age - b.age : b.age - a.age;
+        });
+        sortAgeAsc = !sortAgeAsc;
+        sortAgeBtn.textContent = sortAgeAsc ? 'Sort by Age (Low-High)' : 'Sort by Age (High-Low)';
+        renderTable(currentData);
+    });
+
+    renderTable(personnelData);
 </script>
 
 </body>
